@@ -2,8 +2,9 @@
 
 
 
-This project provides a Java-based CLI for training various machine learning models (J48, RandomForest, MLP, SGD, RBF, XGBoost) using Weka. Users can run it either directly with the JAR file or via Docker.
+This project provides a Java-based CLI for training and testing various machine learning models (J48, RandomForest, MLP, SGD, RBF, XGBoost) with their default parameters using Weka. Users can run it either directly with the JAR file or via Docker.
 
+By default, the provided dataset is split into **80% training** and **20% testing**, and evaluation metrics are computed on the test set.
 
 
 ## Running with JAR
