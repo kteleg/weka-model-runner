@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class WekaModelRunner {
 
@@ -118,6 +119,18 @@ public class WekaModelRunner {
             System.out.println(modelName + " supports nominal attributes directly. No conversion needed.");
 
         }
+        
+        // Shuffle and split dataset (80% train, 20% test)
+        dataset.randomize(new Random(42));
+        int trainSize = (int) Math.round(dataset.numInstances() * 0.8);
+        int testSize = dataset.numInstances() - trainSize;
+        Instances trainSet = new Instances(dataset, 0, trainSize);
+        Instances testSet = new Instances(dataset, trainSize, testSize);
+
+        System.out.println("=== Training set preview ===");
+        printDatasetHead(trainSet, 5);
+        System.out.println("=== Testing set preview ===");
+        printDatasetHead(testSet, 5);
 
         // Instantiate the selected classifier
         Classifier model = getModel(modelName);
@@ -127,12 +140,12 @@ public class WekaModelRunner {
         }
 
         // Train the model
-        model.buildClassifier(dataset);
+        model.buildClassifier(trainSet);
 
-        System.out.println("=== Trained " + modelName + " on dataset " + datasetKeyOrPath + " ===");
+        System.out.println("=== Trained " + modelName + " on " + trainSet.numInstances() + " instances ===");
         System.out.println(model);
         
-        evaluate(isRegression, dataset, model);
+        evaluate(isRegression, testSet, model);
     }
 
 	private static void evaluate(boolean isRegression, Instances dataset, Classifier model) throws Exception {
