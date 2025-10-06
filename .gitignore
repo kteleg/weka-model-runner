@@ -1,0 +1,16 @@
+# Eclipse files
+.metadata/
+*.classpath
+*.project
+*.settings/
+bin/
+tmp/
+
+# Maven target folder
+target/
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
