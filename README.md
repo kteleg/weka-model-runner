@@ -126,7 +126,9 @@ docker run --rm weka-model-runner J48 tennis -1 cls
 
 You can also provide the path to a custom CSV dataset.
 
+## Download Pre-Built JAR
 
+You can also download the latest release JAR from [GitHub Releases](https://github.com/kteleg/weka-model-runner/releases) and run it without building the project.
 
 ## Notes
 
